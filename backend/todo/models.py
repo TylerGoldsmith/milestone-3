@@ -1,7 +1,8 @@
 # Dependencies
 from django.db import models
+from django_cryptography.fields import encrypt
 
-
+# Video Game Models
 # Game Platform Model
 class game_platform(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -56,3 +57,8 @@ class genre(models.Model):
 
     def _str_(self):
         return self.title
+
+# User Data Models
+# Username Model
+
+
