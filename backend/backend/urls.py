@@ -13,15 +13,31 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# Dependencies
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from todo import views
 
-router = routers.DefaultRouter()
-router.register(r'todos', views.TodoView, 'todo')
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+# genre
+    path('genres/', views.genre_list),
+    path('genre/<int:pk>/', views.genre_detail),
+# games
+    path('games/', views.game_list),
+    path('game/<int:pk>/', views.game_detail),
+# publisher
+    path('publishers/', views.publisher_list),
+    path('publisher/<int:pk>/', views.publisher_detail),
+# game publisher
+    path('game_publishers/', views.game_publisher_list),
+    path('game_publisher/<int:pk>/', views.game_publisher_detail),
+# platform
+    path('platforms/', views.platform_list),
+    path('platform/<int:pk>/', views.platform_detail),
+# game platform
+    path('game_platforms/', views.game_platform_list),
+    path('game_platform/<int:pk>/', views.game_platform_detail),
 ]
