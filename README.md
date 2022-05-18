@@ -30,9 +30,13 @@ The project I am attempting to create is a video game review site in which you c
 
 ###### Languages used
 Front End:
+
     - React(JS)
+
     - SASS(CSS)
+
 Back End:
+
     -Django(Python)
 
 ## Installing
@@ -89,8 +93,12 @@ sass --watch src/assets/scss/style.scss:src/assets/css/style.css
 npx serve .
 ```
 
+### Data Structure
+![Data Structure Image](frontend/src/assets/images/readme/vg_reviews_datastructure)
+
 ###### Technical Sources:
 [Django-rest-framework](https://www.django-rest-framework.org/tutorial/1-serialization/)
+
 [Digital Ocean](https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react)
 
 ###### Asset Sources:
