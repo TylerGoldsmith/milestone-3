@@ -21,7 +21,13 @@ from todo import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    # path('api/', include(router.urls)),
+# user account
+    path('user_accounts/', views.user_account_list),
+    path('user_account/<int:pk>/', views.user_account_detail),
+# review
+    path('reviews/', views.review_list),
+    path('review/<int:pk>/', views.review_detail),
 # genre
     path('genres/', views.genre_list),
     path('genre/<int:pk>/', views.genre_detail),

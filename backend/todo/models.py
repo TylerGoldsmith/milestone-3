@@ -2,6 +2,27 @@
 from django.db import models
 from django_cryptography.fields import encrypt
 
+# User Data Models
+# User account Model
+class User_Account(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user_account_name = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    enc_em_ua = encrypt(models.CharField(max_length=30))
+    enc_pw_ua = encrypt(models.CharField(max_length=25))
+
+    class User_Account_Serialization:
+        ordering = ['created']
+
+# Review
+class Review(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    review = models.TextField(max_length=100)
+    user_account_id = models.ForeignKey(User_Account, on_delete=models.CASCADE)
+
+    class Review_Serialization:
+        ordering = ['created']
+
 # Video Game Models
 # Genre Model
 class Genre(models.Model):
@@ -15,6 +36,7 @@ class Genre(models.Model):
 class Game(models.Model):
     id = models.BigAutoField(primary_key=True)
     genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    review_id = models.ForeignKey(Review, default="", on_delete=models.CASCADE)
     platform_name = models.CharField(max_length=30)
     game_description = models.TextField()
 
@@ -51,11 +73,7 @@ class Platform(models.Model):
 class Game_Platform(models.Model):
     id = models.BigAutoField(primary_key=True)
     platform_id = models.ForeignKey(Platform, on_delete=models.CASCADE)
-    release_year = models.SmallIntegerField(max_length=4)
+    release_year = models.CharField(max_length=4)
 
     class Game_Platform_Serialization:
         ordering = ['created']
-# User Data Models
-# Username Model
-
-

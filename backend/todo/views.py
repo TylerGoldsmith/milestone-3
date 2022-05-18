@@ -5,8 +5,94 @@ from rest_framework.parsers import JSONParser
 from django.shortcuts import render
 from rest_framework import viewsets
 # Video Game Imports
-from .serializers import Genre_Serialization, Game_Serialization, Publisher_Serialization, Game_Publisher_Serialization, Platform_Serialization, Game_Platform_Serialization
-from .models import Genre, Game, Publisher, Game_Publisher, Platform, Game_Platform
+from .serializers import Model_Serializer
+from .models import Review, Genre, Game, Publisher, Game_Publisher, Platform, Game_Platform
+# 
+# User Views
+# 
+# User Account View
+# 
+@csrf_exempt
+def user_account_list(request):
+# GET all
+    if request.method == 'GET':
+        user_accounts = User_Account.objects.all()
+        serializer = Model_Serializer(user_accounts, many=True)
+        return JsonResponse(serializer.data, safe=False)
+# POST
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = Model_Serializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+# 
+# Get Put or Delete
+@csrf_exempt
+def user_account_detail(request, pk):
+    try:
+        user_account = User_Account.objects.get(pk=pk)
+    except User_Account.DoesNotExist:
+        return HttpResponse(status=404)
+# GET
+    if request.method == 'GET':
+        serializer = Model_Serializer(review)
+        return JsonResponse(serializer.data)
+# PUT
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = Model_Serializer(user_account, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+# DELETE
+    elif request.method == 'DELETE':
+        user_account.delete()
+        return HttpResponse(status=204)
+# 
+# Review View
+# 
+@csrf_exempt
+def review_list(request):
+# GET all
+    if request.method == 'GET':
+        reviews = Review.objects.all()
+        serializer = Model_Serializer(reviews, many=True)
+        return JsonResponse(serializer.data, safe=False)
+# POST
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = Model_Serializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+# 
+# Get Put or Delete
+@csrf_exempt
+def review_detail(request, pk):
+    try:
+        review = Review.objects.get(pk=pk)
+    except Review.DoesNotExist:
+        return HttpResponse(status=404)
+# GET
+    if request.method == 'GET':
+        serializer = Model_Serializer(review)
+        return JsonResponse(serializer.data)
+# PUT
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = Model_Serializer(review, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+# DELETE
+    elif request.method == 'DELETE':
+        review.delete()
+        return HttpResponse(status=204)
 # 
 # Video Game Views
 # 
@@ -18,12 +104,12 @@ def genre_list(request):
 # GET all
     if request.method == 'GET':
         genres = Genre.objects.all()
-        serializer = Genre_Serialization(genres, many=True)
+        serializer = Model_Serializer(genres, many=True)
         return JsonResponse(serializer.data, safe=False)
 # POST
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = Genre_Serializer(data=data)
+        serializer = Model_Serializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
@@ -38,12 +124,12 @@ def genre_detail(request, pk):
         return HttpResponse(status=404)
 # GET
     if request.method == 'GET':
-        serializer = Genre_Serialization(genre)
+        serializer = Model_Serializer(genre)
         return JsonResponse(serializer.data)
 # PUT
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = Genre_Serialization(genre, data=data)
+        serializer = Model_Serializer(genre, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
@@ -61,12 +147,12 @@ def game_list(request):
 # GET all
     if request.method == 'GET':
         games = Game.objects.all()
-        serializer = Game_Serialization(games, many=True)
+        serializer = Model_Serializer(games, many=True)
         return JsonResponse(serializer.data, safe=False)
 # POST
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = Game_Serialization(data=data)
+        serializer = Model_Serializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
@@ -81,12 +167,12 @@ def game_detail(request, pk):
         return HttpResponse(status=404)
 # GET
     if request.method == 'GET':
-        serializer = Game_Serialization(game)
+        serializer = Model_Serializer(game)
         return JsonResponse(serializer.data)
 # PUT
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = Game_Serialization(game, data=data)
+        serializer = Model_Serializer(game, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
@@ -104,12 +190,12 @@ def publisher_list(request):
 # GET all
     if request.method == 'GET':
         publishers = Publisher.objects.all()
-        serializer = Publisher_Serialization(publishers, many=True)
+        serializer = Model_Serializer(publishers, many=True)
         return JsonResponse(serializer.data, safe=False)
 # POST
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = Publisher_Serialization(data=data)
+        serializer = Model_Serializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
@@ -124,12 +210,12 @@ def publisher_detail(request, pk):
         return HttpResponse(status=404)
 # GET
     if request.method == 'GET':
-        serializer = Publisher_Serialization(publisher)
+        serializer = Model_Serializer(publisher)
         return JsonResponse(serializer.data)
 # PUT
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = Publisher_Serialization(publisher, data=data)
+        serializer = Model_Serializer(publisher, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
@@ -147,12 +233,12 @@ def game_publisher_list(request):
 # GET all
     if request.method == 'GET':
         game_publishers = Game_Publisher.objects.all()
-        serializer = Game_Publisher_Serialization(game_publishers, many=True)
+        serializer = Model_Serializer(game_publishers, many=True)
         return JsonResponse(serializer.data, safe=False)
 # POST
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = Game_Publisher_Serialization(data=data)
+        serializer = Model_Serializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
@@ -167,12 +253,12 @@ def game_publisher_detail(request, pk):
         return HttpResponse(status=404)
 # GET
     if request.method == 'GET':
-        serializer = Game_Publisher_Serialization(game_publisher)
+        serializer = Model_Serializer(game_publisher)
         return JsonResponse(serializer.data)
 # PUT
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = Game_Publisher_Serialization(game_publisher, data=data)
+        serializer = Model_Serializer(game_publisher, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
@@ -190,12 +276,12 @@ def platform_list(request):
 # GET all
     if request.method == 'GET':
         platforms = Platform.objects.all()
-        serializer = Platform_Serialization(platforms, many=True)
+        serializer = Model_Serializer(platforms, many=True)
         return JsonResponse(serializer.data, safe=False)
 # POST
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = Platform_Serialization(data=data)
+        serializer = Model_Serializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
@@ -210,12 +296,12 @@ def platform_detail(request, pk):
         return HttpResponse(status=404)
 # GET
     if request.method == 'GET':
-        serializer = Platform_Serialization(platform)
+        serializer = Model_Serializer(platform)
         return JsonResponse(serializer.data)
 # PUT
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = Platform_Serialization(platform, data=data)
+        serializer = Model_Serializer(platform, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
@@ -233,12 +319,12 @@ def game_platform_list(request):
 # GET all
     if request.method == 'GET':
         game_platforms = Game_Platform.objects.all()
-        serializer = Game_Platform_Serialization(game_platforms, many=True)
+        serializer = Model_Serializer(game_platforms, many=True)
         return JsonResponse(serializer.data, safe=False)
 # POST
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = Game_Platform_Serialization(data=data)
+        serializer = Model_Serializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
@@ -253,12 +339,12 @@ def game_platform_detail(request, pk):
         return HttpResponse(status=404)
 # GET
     if request.method == 'GET':
-        serializer = Game_Platform_Serialization(game_platform)
+        serializer = Model_Serializer(game_platform)
         return JsonResponse(serializer.data)
 # PUT
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = Game_Platform_Serialization(game_platform, data=data)
+        serializer = Model_Serializerso(game_platform, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
