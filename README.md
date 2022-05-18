@@ -30,14 +30,11 @@ The project I am attempting to create is a video game review site in which you c
 
 ###### Languages used
 Front End:
-
-    - React(JS)
-
-    - SASS(CSS)
+- React(JS)
+- SASS(CSS)
 
 Back End:
-
-    -Django(Python)
+- Django(Python)
 
 ## Installing
 ### Clone the project
