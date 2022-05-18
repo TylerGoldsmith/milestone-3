@@ -4,13 +4,13 @@ from .models import User_Account, Review, Genre, Game, Publisher, Game_Publisher
 
 # User Account
 class User_Account_Admin(admin.ModelAdmin):
-    list_display = ('id', 'user_account_name', 'enc_em_ua', 'enc_pw_ua')
+    list_display = ('id', 'user_account_name', 'created_at', 'enc_em_ua', 'enc_pw_ua')
 
 admin.site.register(User_Account, User_Account_Admin)
 
 # Review
 class Review_Admin(admin.ModelAdmin):
-    list_display = ('id', 'review', 'user_account_id')
+    list_display = ('id', 'review', 'created_at', 'user_account_id')
 
 admin.site.register(Review, Review_Admin)
 
@@ -22,7 +22,7 @@ admin.site.register(Genre, Genre_Admin)
 
 # Game
 class Game_Admin(admin.ModelAdmin):
-    list_display = ('id', 'genre_id', 'platform_name','game_description')
+    list_display = ('id', 'genre_id', 'game_name','game_description')
 
 admin.site.register(Game, Game_Admin)
 # Publisher

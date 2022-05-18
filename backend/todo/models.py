@@ -18,6 +18,8 @@ class User_Account(models.Model):
 class Review(models.Model):
     id = models.BigAutoField(primary_key=True)
     review = models.TextField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    # updated_at = models.DateTimeField(auto_now_add=True, default='')
     user_account_id = models.ForeignKey(User_Account, on_delete=models.CASCADE)
 
     class Review_Serialization:
@@ -37,7 +39,7 @@ class Game(models.Model):
     id = models.BigAutoField(primary_key=True)
     genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
     review_id = models.ForeignKey(Review, default="", on_delete=models.CASCADE)
-    platform_name = models.CharField(max_length=30)
+    game_name = models.CharField(max_length=30)
     game_description = models.TextField()
 
     class Game_Serialization:
@@ -64,7 +66,6 @@ class Game_Publisher(models.Model):
 class Platform(models.Model):
     id = models.BigAutoField(primary_key=True)
     platform_name = models.CharField(max_length=30)
-
 
     class Publisher_Serialization:
         ordering = ['created']

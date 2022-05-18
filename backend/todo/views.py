@@ -6,7 +6,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 # Video Game Imports
 from .serializers import Model_Serializer
-from .models import Review, Genre, Game, Publisher, Game_Publisher, Platform, Game_Platform
+from .models import User_Account, Review, Genre, Game, Publisher, Game_Publisher, Platform, Game_Platform
 # 
 # User Views
 # 

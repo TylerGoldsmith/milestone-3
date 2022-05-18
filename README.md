@@ -42,7 +42,7 @@ Back End:
 git clone https://github.com/TylerGoldsmith/milestone-3
 cd milestone-3
 ```
-### Actuvate Virtual Environment
+### Actvvate Virtual Environment
 ```
 Start at the top level
 python3 -m venv venv
@@ -77,6 +77,12 @@ Start at top level
 python manage.py runserver
 ```
 
+### Observe database
+```
+http://127.0.0.1:8000/admin/
+Login
+```
+
 ### Install Dependencies in Front End
 ```
 cd frontend
@@ -97,6 +103,8 @@ npx serve .
 [Django-rest-framework](https://www.django-rest-framework.org/tutorial/1-serialization/)
 
 [Digital Ocean](https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react)
+
+[Django Cryptography](https://django-cryptography.readthedocs.io/en/latest/examples.html)
 
 ###### Asset Sources:
 Empty
