@@ -94,7 +94,7 @@ npx serve .
 ```
 
 ### Data Structure
-![Data Structure Image](frontend/src/assets/images/readme/vg_reviews_datastructure)
+![Data Structure Image](/frontend/src/assets/images/readme/vg_reviews_datastructure.jpg)
 
 ###### Technical Sources:
 [Django-rest-framework](https://www.django-rest-framework.org/tutorial/1-serialization/)
