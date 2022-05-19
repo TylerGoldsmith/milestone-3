@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import { Container, NavBar } from './index';
+import { Container } from './index';
+import '../assets/css/style.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+
         <p>
-          App.js test          
+          <Container />
+          App.js Test
         </p>
       </div>
     );

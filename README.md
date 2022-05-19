@@ -85,15 +85,19 @@ Login
 
 ### Install Dependencies in Front End
 ```
+Start at top level
 cd frontend
 npm i create-react-app
 npm i sass
+npm i react-bootstrap bootstrap
 ```
 
 ### Run programs
 ```
+Start at top level
+cd frontend
 sass --watch src/assets/scss/style.scss:src/assets/css/style.css
-npx serve .
+npm start
 ```
 
 ### Data Structure
@@ -105,6 +109,8 @@ npx serve .
 [Digital Ocean](https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react)
 
 [Django Cryptography](https://django-cryptography.readthedocs.io/en/latest/examples.html)
+
+[React Bootstrap](https://react-bootstrap.github.io/components/dropdowns/)
 
 ###### Asset Sources:
 Empty
