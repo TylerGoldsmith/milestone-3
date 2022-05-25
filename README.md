@@ -53,8 +53,7 @@ source venv/Scripts/activate
 Start at top level
 cd backend
 python -m pip install Django
-pip install django-cors-headers
-pip install django-cryptography
+pip install django-cors-headers djangorestframework-simplejwt django-cryptography
 ```
 
 ### Run the migrations in Back End
@@ -74,6 +73,7 @@ python manage.py migrations
 ### Run server
 ```
 Start at top level
+cd backend
 python manage.py runserver
 ```
 
@@ -87,9 +87,7 @@ Login
 ```
 Start at top level
 cd frontend
-npm i create-react-app
-npm i sass
-npm i react-bootstrap bootstrap
+npm i create-react-app react-bootstrap bootstrap axios sass reactstrap
 ```
 
 ### Run programs
@@ -111,6 +109,8 @@ npm start
 [Django Cryptography](https://django-cryptography.readthedocs.io/en/latest/examples.html)
 
 [React Bootstrap](https://react-bootstrap.github.io/components/dropdowns/)
+
+[Log Rocket-Diogo Souzo](https://blog.logrocket.com/creating-an-app-with-react-and-django/)
 
 ###### Asset Sources:
 Empty

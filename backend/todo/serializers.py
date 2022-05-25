@@ -1,10 +1,14 @@
 from rest_framework import serializers
 from .models import User_Account, Review, Genre, Game, Publisher, Game_Publisher, Platform, Game_Platform
 
+
+
+
 class Model_Serializer(serializers.ModelSerializer):
     class User_Account_Serialization:
         model: User_Account
-        fields: ('id', 'user_account_name', 'created_at', 'enc_em_ua', 'enc_pw_ua')
+        fields: ('id', 'username', 'created_at', 'email', 'enc_pw_ua', 'is_active', 'created', 'updated')
+        read_only_field = ['is_active', 'created', 'updated']
 
     class Review_Serialization:
         model: Review

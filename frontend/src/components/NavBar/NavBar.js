@@ -1,23 +1,40 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
-import { SearchBar, LoginDropdown } from '../index';
+import { SearchBar, LogInDropdown } from '../index';
 
-class NavBar extends Component {
 
-    render() {
-        return (
-            <div className="NavBar">
-                <ul className="NavBarUL">
-                    <li><a href="/">Home</a></li>
-                    <li><SearchBar
-                    // searchQuery={searchQuery}
-                    // setSearchQuery={setSearchQuery}
-                    /></li>
-                    <li><LoginDropdown /></li>
-                </ul>
-            </div>
-        );
-    }
-}
+const NavBar = () => {
+    const [isAuth, setIsAuth] = useState(false);
+
+    useEffect(() => {
+        if (localStorage.getItem('token') !== null) {
+            setIsAuth(true);
+        }
+    }, []);
+
+    return (
+        <nav>
+            <h1>NavBar</h1>
+            <ul>
+                {isAuth === true ? (
+                    <li>
+                        <Link to='/'>Home</Link>
+                    </li>
+                ) : (
+                    <Fragment>
+                        {' '}
+                        <li>
+                            <SearchBar />
+                        </li>
+                        <li>
+                            <LogInDropdown />
+                        </li>
+                    </Fragment>
+                )}
+            </ul>
+        </nav>
+    );
+};
 
 export default NavBar;

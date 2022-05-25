@@ -3,19 +3,18 @@ import { ButtonGroup, Button, Dropdown } from 'react-bootstrap';
 
 // import { LoginForm } from '../index';
 
-class LoginDropdown extends Component {
+class LogInDropdown extends Component {
   render() {
     return (
-      <div className="LoginDropdown">
+      <div className="UserAccountDropdown">
         <Dropdown as={ButtonGroup}>
           <Button variant="success">Split Button</Button>
 
           <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
 
           <Dropdown.Menu>
-            <Dropdown.Item href="/Login">Login</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Logout</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            <Dropdown.Item href="/UserAccount">UserAccount</Dropdown.Item>
+            <Dropdown.Item href="/Logout">Logout</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </div>
@@ -23,4 +22,4 @@ class LoginDropdown extends Component {
   }
 }
 
-export default LoginDropdown;
+export default LogInDropdown;

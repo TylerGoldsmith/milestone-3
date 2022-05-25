@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import { Home, NavBar, LoginForm } from '../index';
+import { Home, NavBar, UserAccount, Logout } from '../index';
 
 class Container extends Component {
     render() {
@@ -15,9 +15,14 @@ class Container extends Component {
                                 <Home />
                             </div>
                         } />
-                        <Route exact path="/Login" element={
+                        <Route exact path="/UserAccount" element={
                             <div>
-                                <LoginForm />
+                                <UserAccount />
+                            </div>
+                        } />
+                        <Route exact path="/Logout" element={
+                            <div>
+                                <Logout />
                             </div>
                         } />
                     </Routes>

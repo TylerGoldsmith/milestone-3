@@ -15,13 +15,14 @@ Including another URLconf
 """
 # Dependencies
 from django.contrib import admin
-from django.urls import path, include
 from rest_framework import routers
+from django.urls import include, path
 from todo import views
 
+
 urlpatterns = [
+    path('api/v1/todo/', include('todo.urls')),
     path('admin/', admin.site.urls),
-    # path('api/', include(router.urls)),
 # user account
     path('user_accounts/', views.user_account_list),
     path('user_account/<int:pk>/', views.user_account_detail),

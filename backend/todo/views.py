@@ -4,6 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import filters
 # Video Game Imports
 from .serializers import Model_Serializer
 from .models import User_Account, Review, Genre, Game, Publisher, Game_Publisher, Platform, Game_Platform
@@ -11,6 +13,27 @@ from .models import User_Account, Review, Genre, Game, Publisher, Game_Publisher
 # User Views
 # 
 # User Account View
+# 
+@csrf_exempt
+class UserViewSet(viewsets.ModelViewSet):
+    http_method_names = ['get']
+    serializer_class = Model_Serializer.User_Account_Serialization
+    permission_classes = (IsAuthenticated,)
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['updated']
+    ordering = ['-updated']
+
+    def get_queryset(self):
+        if self.request.user_account.is_superuser:
+            return User_Account.objects.all()
+
+    def get_object(self):
+        lookup_field_value = self.kwargs[self.lookup_field]
+
+        obj = User_Account.objects.get(lookup_field_value)
+        self.check_object_permissions(self.request, obj)
+
+        return obj
 # 
 @csrf_exempt
 def user_account_list(request):
@@ -51,6 +74,7 @@ def user_account_detail(request, pk):
     elif request.method == 'DELETE':
         user_account.delete()
         return HttpResponse(status=204)
+# 
 # 
 # Review View
 # 
