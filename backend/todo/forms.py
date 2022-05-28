@@ -5,7 +5,7 @@ from .models import User_Account, Review, Genre, Game, Publisher, Game_Publisher
 class Custom_User_Account_Form(UserCreationForm):    
     class Meta:        
         model = User_Account        
-        fields = ('id', 'username', 'email', 'enc_pw_ua')
+        fields = ('id', 'username', 'email', 'password')
         # read_only_field = ['is_active', 'created', 'updated']
 class Custom_User_Account_Change_Form(UserChangeForm):    
     class Meta:        

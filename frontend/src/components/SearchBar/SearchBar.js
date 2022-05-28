@@ -14,7 +14,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
             autoComplete="off"
             onSubmit={onSubmit}
         >
-            
+
             <input
                 value={searchQuery}
                 onInput={(e) => setSearchQuery(e.target.value)}

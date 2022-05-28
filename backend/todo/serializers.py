@@ -7,7 +7,7 @@ from .models import User_Account, Review, Genre, Game, Publisher, Game_Publisher
 class Model_Serializer(serializers.ModelSerializer):
     class User_Account_Serialization:
         model: User_Account
-        fields: ('id', 'username', 'created_at', 'email', 'enc_pw_ua', 'is_active', 'created', 'updated')
+        fields: ('id', 'username', 'created_at', 'email', 'password', 'is_active', 'created', 'updated')
         read_only_field = ['is_active', 'created', 'updated']
 
     class Review_Serialization:

@@ -12,7 +12,7 @@ class User_Account_Admin(admin.ModelAdmin):
     add_form = Custom_User_Account_Form
     form = Custom_User_Account_Change_Form
     model = User_Account
-    list_display = ('id', 'username', 'created_at', 'email', 'enc_pw_ua')
+    list_display = ('id', 'username', 'created_at', 'email', 'password')
 
 admin.site.register(User_Account, User_Account_Admin)
 

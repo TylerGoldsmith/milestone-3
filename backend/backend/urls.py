@@ -19,32 +19,31 @@ from rest_framework import routers
 from django.urls import include, path
 from todo import views
 
-
 urlpatterns = [
     path('api/v1/todo/', include('todo.urls')),
     path('admin/', admin.site.urls),
 # user account
-    path('user_accounts/', views.user_account_list),
+    path('user_account/', views.user_account_list),
     path('user_account/<int:pk>/', views.user_account_detail),
 # review
-    path('reviews/', views.review_list),
+    path('review/', views.review_list),
     path('review/<int:pk>/', views.review_detail),
 # genre
-    path('genres/', views.genre_list),
+    path('genre/', views.genre_list),
     path('genre/<int:pk>/', views.genre_detail),
 # games
-    path('games/', views.game_list),
+    path('game/', views.game_list),
     path('game/<int:pk>/', views.game_detail),
 # publisher
-    path('publishers/', views.publisher_list),
+    path('publisher/', views.publisher_list),
     path('publisher/<int:pk>/', views.publisher_detail),
 # game publisher
-    path('game_publishers/', views.game_publisher_list),
+    path('game_publisher/', views.game_publisher_list),
     path('game_publisher/<int:pk>/', views.game_publisher_detail),
 # platform
-    path('platforms/', views.platform_list),
+    path('platform/', views.platform_list),
     path('platform/<int:pk>/', views.platform_detail),
 # game platform
-    path('game_platforms/', views.game_platform_list),
+    path('game_platform/', views.game_platform_list),
     path('game_platform/<int:pk>/', views.game_platform_detail),
 ]

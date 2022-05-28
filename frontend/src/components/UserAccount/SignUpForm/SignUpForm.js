@@ -11,7 +11,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (localStorage.getItem('token') !== null) {
-      window.location.replace('http://localhost:3000/dashboard');
+      window.location.replace('http://localhost:3000/');
     } else {
       setLoading(false);
     }
@@ -20,25 +20,25 @@ const Signup = () => {
   const onSubmit = e => {
     e.preventDefault();
 
-    const user = {
+    const username = {
       email: email,
       password1: password1,
       password2: password2
     };
 
-    fetch('http://127.0.0.1:8000/api/v1/users/auth/register/', {
+    fetch('http://127.0.0.1:8000/api/v1/todo/auth/register/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(username)
     })
       .then(res => res.json())
       .then(data => {
         if (data.key) {
           localStorage.clear();
           localStorage.setItem('token', data.key);
-          window.location.replace('http://localhost:3000/dashboard');
+          window.location.replace('http://localhost:3000/signup');
         } else {
           setEmail('');
           setPassword1('');

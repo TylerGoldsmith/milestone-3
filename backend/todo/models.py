@@ -8,37 +8,38 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 class UserManager(BaseUserManager):
 
-    def Create_User_Account(self, username, email, enc_pw_ua=None, **kwargs):
-        if enc_pw_ua is None:
+    def create_user(self, username, email, password=None, **kwargs):
+        if password is None:
             raise TypeError('Users must have a password.')
         if username is None:
             raise TypeError('Users must have a username.')
         if email is None:
             raise TypeError('Users must have an email.')
 
-        username = self.model(
+        User_Account = self.model(
             username=username, email=self.normalize_email(email))
-        username.set_password(enc_pw_ua)
-        username.save(using=self._db)
+        User_Account.set_password(password)
+        User_Account.save(using=self._db)
 
-        return self.username, self.enc_pw_ua, self.email, self
+        return User_Account
 
-    def Create_Admin_Account(self, username, email, enc_pw_ua):
+    def create_superuser(self, username, email, password):
 
-        if enc_pw_ua is None:
+        if password is None:
             raise TypeError('Admin must have a password.')
         if email is None:
             raise TypeError('Admin must have an email.')
         if username is None:
             raise TypeError('Admin must have an username.')
 
-        username = self.create_user(
-            username, email, enc_pw_ua)
-        username.is_superuser = True
-        username.is_staff = True
-        username.save(using=self._db)
+        User_Account = self.create_user(
+            username, email, password)
+        User_Account.is_superuser = True
+        User_Account.is_staff = True
+        User_Account.is_admin = True
+        User_Account.save(using=self._db)
 
-        return self.username, self.enc_pw_ua, self.email, self
+        return User_Account
 
     def get_by_natural_key(self, email):
         return self.get(email=email)
@@ -46,12 +47,23 @@ class UserManager(BaseUserManager):
 
 # User Data Models
 # User account Model
-class User_Account(AbstractBaseUser):
+class User_Account(AbstractBaseUser, PermissionsMixin):
     id = models.BigAutoField(primary_key=True)
-    username = models.CharField(db_index=True, max_length=255, unique=True)
+    is_active = models.BooleanField(default=True)
+    staff = models.BooleanField(default=False)
+    admin = models.BooleanField(default=False)
+    username = models.CharField(
+        db_index=True, 
+        max_length=255, 
+        unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    email = models.CharField(db_index=True, unique=True,  null=True, blank=True, max_length=50)
-    enc_pw_ua = models.CharField(max_length=25)
+    email = models.CharField(
+        db_index=True, 
+        unique=True,  
+        null=True, 
+        blank=True, 
+        max_length=50)
+    password = models.CharField(max_length=25)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -66,12 +78,29 @@ class User_Account(AbstractBaseUser):
     def is_authenticated(self):
         return True
 
+    @property
+    def is_staff(self):
+        return self.staff
+
+    @property
+    def is_admin(self):
+        return self.staff
+
 
     class User_Account_Serialization:
         ordering = ['created']
 
     def __str__(self):
-        return f"{self.email}"
+        return self.email
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+# Create User
+
 
 # Review
 class Review(models.Model):
